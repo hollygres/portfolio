@@ -276,6 +276,20 @@ body {
   text-align: center;
 }
 
+/* ─── Instagram Embed ──────────────────────────────────────── */
+.ig-embed-wrap {
+  margin: 1.25rem 0 0.5rem;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.ig-embed-wrap .instagram-media {
+  max-width: 100% !important;
+  min-width: 0 !important;
+  width: 100% !important;
+  margin: 0 !important;
+}
+
 /* ─── Carousel Placeholder ─────────────────────────────────── */
 .carousel-placeholder {
   width: 100%;
