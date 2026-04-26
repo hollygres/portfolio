@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vox Media — Holly Gressley</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .gate {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    .gate-box {
+      width: 100%;
+      max-width: 380px;
+      text-align: center;
+    }
+    .gate-title {
+      font-family: var(--font-sans);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--black);
+      margin-bottom: 0.35rem;
+    }
+    .gate-sub {
+      font-family: var(--font-sans);
+      font-size: 0.82rem;
+      color: var(--gray-mid);
+      margin-bottom: 2rem;
+    }
+    .gate-form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .gate-input {
+      width: 100%;
+      padding: 0.65rem 0.85rem;
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      border: 1px solid var(--gray-light);
+      border-radius: 4px;
+      outline: none;
+      color: var(--black);
+      transition: border-color 0.15s;
+    }
+    .gate-input:focus { border-color: var(--black); }
+    .gate-input.error { border-color: #c0392b; }
+    .gate-btn {
+      width: 100%;
+      padding: 0.65rem;
+      font-family: var(--font-sans);
+      font-size: 0.85rem;
+      font-weight: 600;
+      background: var(--black);
+      color: var(--white);
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      letter-spacing: 0.03em;
+      transition: opacity 0.15s;
+    }
+    .gate-btn:hover { opacity: 0.75; }
+    .gate-error {
+      font-family: var(--font-sans);
+      font-size: 0.78rem;
+      color: #c0392b;
+      display: none;
+    }
+    .gate-error.visible { display: block; }
+    .gate-back {
+      display: inline-block;
+      margin-top: 1.5rem;
+      font-family: var(--font-sans);
+      font-size: 0.78rem;
+      color: var(--gray-mid);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .gate-back:hover { color: var(--black); }
+
+    .case-study { display: none; }
+    .case-study.unlocked { display: block; }
+
+    .cs-header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+    .cs-back {
+      font-family: var(--font-sans);
+      font-size: 0.78rem;
+      color: var(--gray-mid);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .cs-back:hover { color: var(--black); }
+    .cs-org {
+      font-family: var(--font-sans);
+      font-size: 0.78rem;
+      color: var(--gray-mid);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .cs-title {
+      font-family: var(--font-sans);
+      font-size: 1.75rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      margin-top: 0.5rem;
+      line-height: 1.2;
+    }
+    .cs-meta {
+      display: flex;
+      gap: 2rem;
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--gray-light);
+    }
+    .cs-meta-item { display: flex; flex-direction: column; gap: 0.2rem; }
+    .cs-meta-label {
+      font-family: var(--font-sans);
+      font-size: 0.7rem;
+      color: var(--gray-mid);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .cs-meta-value {
+      font-family: var(--font-sans);
+      font-size: 0.88rem;
+      color: var(--black);
+    }
+    .cs-section { margin-bottom: 3rem; }
+    .cs-section-title {
+      font-family: var(--font-sans);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gray-mid);
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--gray-light);
+    }
+    .cs-body {
+      font-size: 0.95rem;
+      color: var(--gray-dark);
+      line-height: 1.8;
+    }
+    .cs-image-placeholder {
+      width: 100%;
+      height: 360px;
+      background: var(--gray-bg);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 1.5rem 0;
+    }
+    .cs-image-placeholder span {
+      font-family: var(--font-sans);
+      font-size: 0.78rem;
+      color: var(--gray-mid);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PASSWORD GATE -->
+  <div class="gate" id="gate">
+    <div class="gate-box">
+      <p class="gate-title">Vox Media — Case Study</p>
+      <p class="gate-sub">This work is password protected.<br>Enter the password to continue.</p>
+      <form class="gate-form" id="gate-form">
+        <input class="gate-input" id="gate-input" type="password" placeholder="Password" autocomplete="current-password" />
+        <p class="gate-error" id="gate-error">Incorrect password. Please try again.</p>
+        <button class="gate-btn" type="submit">View case study</button>
+      </form>
+      <a class="gate-back" href="index.html">&#8592; Back to portfolio</a>
+    </div>
+  </div>
+
+  <!-- CASE STUDY CONTENT -->
+  <div class="case-study" id="case-study">
+
+    <header class="site-header">
+      <div class="container cs-header-inner">
+        <a class="cs-back" href="index.html">&#8592; Holly Gressley</a>
+        <span class="cs-org">Case Study</span>
+      </div>
+    </header>
+
+    <main class="container">
+
+      <section class="cs-section">
+        <p class="cs-org">Vox Media</p>
+        <h1 class="cs-title">Chorus Design System<br>& Creator Tools</h1>
+        <div class="cs-meta">
+          <div class="cs-meta-item">
+            <span class="cs-meta-label">Role</span>
+            <span class="cs-meta-value">Principal Designer → Design Director</span>
+          </div>
+          <div class="cs-meta-item">
+            <span class="cs-meta-label">Years</span>
+            <span class="cs-meta-value">2016 – 2018</span>
+          </div>
+          <div class="cs-meta-item">
+            <span class="cs-meta-label">Type</span>
+            <span class="cs-meta-value">Design Systems, Product Design, Management</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="cs-section">
+        <h2 class="cs-section-title">Overview</h2>
+        <p class="cs-body">At Vox Media, I initiated and developed a design system for Chorus, our suite of publishing tools (CMS), leading the work of several designers. I moved into a management role, leading product design for the creator-focused side of Chorus.</p>
+      </section>
+
+      <section class="cs-section">
+        <h2 class="cs-section-title">Work</h2>
+        <div class="cs-image-placeholder"><span>[ Images — to be added ]</span></div>
+        <div class="cs-image-placeholder"><span>[ Images — to be added ]</span></div>
+      </section>
+
+    </main>
+  </div>
+
+  <script>
+    const PASSWORD = 'holly2026';
+    const SESSION_KEY = 'vox-unlocked';
+
+    const gate = document.getElementById('gate');
+    const caseStudy = document.getElementById('case-study');
+    const form = document.getElementById('gate-form');
+    const input = document.getElementById('gate-input');
+    const error = document.getElementById('gate-error');
+
+    if (sessionStorage.getItem(SESSION_KEY) === 'true') unlock();
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      if (input.value === PASSWORD) {
+        sessionStorage.setItem(SESSION_KEY, 'true');
+        unlock();
+      } else {
+        input.classList.add('error');
+        error.classList.add('visible');
+        input.value = '';
+        input.focus();
+      }
+    });
+
+    input.addEventListener('input', () => {
+      input.classList.remove('error');
+      error.classList.remove('visible');
+    });
+
+    function unlock() {
+      gate.style.display = 'none';
+      caseStudy.classList.add('unlocked');
+    }
+  </script>
+
+</body>
+</html>
