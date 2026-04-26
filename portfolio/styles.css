@@ -316,6 +316,45 @@ body {
   text-align: center;
 }
 
+/* ─── Project Highlights ───────────────────────────────────── */
+.project-highlights {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin: 1.5rem 0 0.75rem;
+}
+
+.project-highlight-label {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gray-mid);
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--gray-light);
+}
+
+.video-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 220px;
+  aspect-ratio: 9 / 16;
+  margin-bottom: 0.75rem;
+  border-radius: 6px;
+  overflow: hidden;
+  background: var(--gray-bg);
+}
+
+.video-wrap iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
 /* ─── Instagram Embed ──────────────────────────────────────── */
 .ig-embed-wrap {
   margin: 1.25rem 0 0.5rem;
@@ -458,5 +497,13 @@ body {
 
   .carousel-slide img {
     height: 220px;
+  }
+
+  .project-highlights {
+    grid-template-columns: 1fr;
+  }
+
+  .video-wrap {
+    max-width: 180px;
   }
 }
