@@ -247,6 +247,46 @@ body {
   background: var(--gray-bg);
 }
 
+/* ─── Carousel Dots ────────────────────────────────────────── */
+.carousel-dots {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.carousel-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  border: none;
+  background: var(--gray-light);
+  padding: 0;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.carousel-dot.active {
+  background: var(--black);
+  transform: scale(1.2);
+}
+
+/* ─── Placeholder Slides ───────────────────────────────────── */
+.placeholder-slide {
+  background: var(--slide-color, var(--gray-bg));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 280px;
+  user-select: none;
+}
+
+.placeholder-slide span {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  color: var(--gray-mid);
+  letter-spacing: 0.04em;
+}
+
 .carousel-btn {
   background: none;
   border: 1px solid var(--gray-light);
