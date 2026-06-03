@@ -65,7 +65,8 @@
     }
     .site-nav__links {
       display: flex;
-      gap: 40px;
+      gap: 24px;
+      align-items: center;
     }
     .site-nav__links a {
       color: var(--ink);
@@ -74,6 +75,22 @@
       text-decoration: none;
     }
     .site-nav__links a:hover { text-decoration: underline; }
+    .site-nav__links .nav-social {
+      display: inline-flex;
+      width: 20px;
+      height: 20px;
+      opacity: 0.8;
+      transition: opacity 0.15s ease;
+    }
+    .site-nav__links .nav-social:hover { opacity: 1; text-decoration: none; }
+    .site-nav__links .nav-social img { width: 100%; height: 100%; display: block; }
+    .site-nav__divider {
+      display: inline-block;
+      width: 1px;
+      height: 16px;
+      background: var(--rule);
+      opacity: 0.6;
+    }
 
     /* Layout */
     main {
@@ -100,6 +117,12 @@
     }
     .intro__copy p {
       margin: 0;
+    }
+    .contact-line {
+      margin-top: 24px !important;
+    }
+    .contact-line a {
+      text-decoration: underline;
     }
     .intro__cta {
       display: flex;
@@ -172,9 +195,32 @@
     /* Past work uses slightly tighter rhythm */
     .past .entry { margin-top: 24px; }
     .past .entry h3 { margin-bottom: 8px; }
-    .date { text-decoration: underline; }
+    .date { text-decoration: none; }
 
     .cta-row { margin-top: 48px; display: flex; gap: 16px; }
+
+    /* Writing, speaking, awards */
+    .press__subhead {
+      font-weight: 600;
+      font-size: 20px;
+      line-height: 32px;
+      color: var(--body);
+      margin: 32px 0 12px;
+    }
+    .press__list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .press__list li {
+      margin: 0 0 8px;
+    }
+    .press__list a {
+      text-decoration: underline;
+    }
+    .press__paragraph {
+      margin: 0;
+    }
 
     /* Footer */
     footer {
@@ -228,8 +274,11 @@
     <div class="site-nav__inner">
       <a href="#" class="brand">Holly Gressley</a>
       <div class="site-nav__links">
-        <a href="#work">Work</a>
         <a href="mailto:holly@superphysical.co">Contact</a>
+        <span class="site-nav__divider" aria-hidden="true"></span>
+        <a href="https://www.linkedin.com/in/holly-gressley-9649a513/" target="_blank" rel="noopener" class="nav-social" aria-label="LinkedIn"><img src="images/linkedin.svg" alt="" /></a>
+        <a href="https://bsky.app/profile/hollygressley.bsky.social" target="_blank" rel="noopener" class="nav-social" aria-label="Bluesky"><img src="images/bluesky.svg" alt="" /></a>
+        <a href="https://www.instagram.com/hollygressley/" target="_blank" rel="noopener" class="nav-social" aria-label="Instagram"><img src="images/instagram.svg" alt="" /></a>
       </div>
     </div>
   </nav>
@@ -242,10 +291,7 @@
     <section class="intro">
       <div class="intro__copy">
         <p>I lead product design strategy, build high-performing teams, and ship at scale in complex domains—from healthcare access to legal AI to media platforms serving millions. I currently lead design for I Need an A, abortion access tech nonprofit. Over the past 20+ years, I've worked with Netflix, Robin AI, Vox Media, Quora, and many others. I'm currently available for fractional consulting opportunities.</p>
-        <div class="intro__cta">
-          <a href="#work" class="btn btn--primary">View Work</a>
-          <a href="mailto:holly@superphysical.co" class="btn btn--secondary">Get in Touch</a>
-        </div>
+        <p class="contact-line">Contact me: <a href="mailto:holly@superphysical.co">holly@superphysical.co</a></p>
       </div>
       <img class="intro__media" src="images/headshot.png" alt="Portrait of Holly Gressley" />
     </section>
@@ -288,10 +334,6 @@
         <p>I consult with select clients in the tech, media, and nonprofit space. I help teams and individuals get unblocked, building prototypes, driving research and plans, and generally being a super senior design resource. Recently, I've worked with Warner Music Group, some early stage tech startups, and a VC fund. If you need some help, feel free to reach out. I'm accepting small fractional engagements right now.</p>
       </div>
 
-      <div class="cta-row">
-        <a href="#work" class="btn btn--primary">View Work</a>
-        <a href="mailto:holly@superphysical.co" class="btn btn--secondary">Get in Touch</a>
-      </div>
     </section>
 
     <hr class="rule" style="margin-top: 64px;" />
@@ -308,12 +350,12 @@
 
       <div class="entry">
         <h3>Netflix</h3>
-        <p><span class="date">2018&ndash;2022</span> &ndash; I worked as a product design lead on Studio XD. We built tools to help Netflix plan our studio productions throughout the world, and I was focused on the finance side. <a href="#">View work</a></p>
+        <p><span class="date">2018&ndash;2022</span> &ndash; I worked as a product design lead on Studio XD. We built tools to help Netflix plan our studio productions throughout the world, and I was focused on the finance side.</p>
       </div>
 
       <div class="entry">
         <h3><a href="https://www.voxmedia.com/" target="_blank" rel="noopener">Vox Media</a></h3>
-        <p><span class="date">2016&ndash;2018</span> &ndash; I joined Vox as a Principal Designer, leading a design system initiative for Chorus, Vox Media's proprietary publishing platform. I later transitioned into a Design Director role, leading the work of several other designers on the Chorus team. <a href="#">View work</a></p>
+        <p><span class="date">2016&ndash;2018</span> &ndash; I joined Vox as a Principal Designer, leading a design system initiative for Chorus, Vox Media's proprietary publishing platform. I later transitioned into a Design Director role, leading the work of several other designers on the Chorus team.</p>
       </div>
 
       <div class="entry">
@@ -331,26 +373,42 @@
         <p><span class="date">2005&ndash;2013</span> &ndash; As a 90s kid, my entry point into design was through publishing &mdash; books, magazines, and newspapers. I liked making information-dense worlds that people held in their hands. During my publishing years, I worked as a designer, art director, and freelancer for publishers like The New York Times, Conde Nast, The Wall Street Journal, GQ, and Dwell. Core learnings: photo shoots are the most fun; collaboration with writers, editors, artists, and other visionaries is the magic; we've got to ship by our deadline no matter what; editing &amp; right-sizing/scoping is an underrated skill. <a href="https://cargocollective.com/hollygressley/Home" target="_blank" rel="noopener">View work</a></p>
       </div>
 
-      <div class="cta-row">
-        <a href="#work" class="btn btn--primary">View Work</a>
-        <a href="mailto:holly@superphysical.co" class="btn btn--secondary">Get in Touch</a>
-      </div>
     </section>
 
     <hr class="rule" style="margin-top: 64px;" />
-
-    <!-- Writing, speaking, awards -->
-    <section class="section">
-      <h2 class="dark">Writing, speaking, and awards</h2>
-      <p style="margin: 16px 0 0;"><a href="https://hollygressley.squarespace.com/about-1" target="_blank" rel="noopener">A little bit of social proof here</a></p>
-    </section>
-
-    <hr class="rule" />
 
     <!-- Personal -->
     <section class="section">
       <h2 class="dark">Personal</h2>
       <p style="margin: 16px 0 0;">I live in Park Slope, Brooklyn with my young daughter, partner, and our dog and cat. I grew up on a farm in Pennsylvania and moved to NYC to study design at Parsons, and am a long time New Yorker who lived through the Giuliani administration. I spent about 10 years in California before returning during Covid, and have had stints in most recently New Orleans, Paris, and Philadelphia. For fun, I love experiencing and making art, writing, museums, travel, and urban life. My current <a href="https://rankednyc.vercel.app/" target="_blank" rel="noopener">side project</a> is designing a better way for parents to navigate the complex world of early childhood education in the NYC public school system.</p>
+    </section>
+
+    <hr class="rule" />
+
+    <!-- Writing, speaking, awards -->
+    <section class="section press">
+      <h2 class="dark">Writing, speaking, and awards</h2>
+
+      <h3 class="press__subhead">Writing</h3>
+      <ul class="press__list">
+        <li><a href="https://www.forbes.com/sites/quora/2015/03/31/should-i-leave-my-design-studio-to-work-in-house-as-a-designer/" target="_blank" rel="noopener">&ldquo;Should I Leave My Design Studio to Work In-House as a Designer?&rdquo;</a> Forbes via Quora, 2015</li>
+        <li><a href="https://product.voxmedia.com/2018/1/9/16633760/vox-media-design-teams-top-19-books-to-read-this-year" target="_blank" rel="noopener">&ldquo;Vox Media design team&rsquo;s top 19 books to read this year&rdquo;</a> Vox Product blog, 2018</li>
+        <li><a href="https://design.quora.com/Designing-Communities" target="_blank" rel="noopener">&ldquo;Designing Communities&rdquo;</a> Quora design blog</li>
+        <li><a href="https://design.quora.com/Reading-List-Urban-Planning-Design" target="_blank" rel="noopener">&ldquo;Reading List: Urban Planning and Design&rdquo;</a> Quora design blog</li>
+        <li><a href="https://www.quora.com/profile/Holly-Gressley" target="_blank" rel="noopener">Quora profile</a></li>
+      </ul>
+
+      <h3 class="press__subhead">Speaking</h3>
+      <ul class="press__list">
+        <li>Adobe Creative Jam, 2019&ndash;2020</li>
+        <li>&ldquo;Concept,&rdquo; California College of the Arts, 2015</li>
+        <li><a href="http://www.letteringandtype.com/site/wp-content/uploads/press/FanLetterNYC_press_release.pdf" target="_blank" rel="noopener">&ldquo;Fan Letter,&rdquo; Cooper Union, 2010</a></li>
+        <li>&ldquo;Rumors,&rdquo; CalArts, 2009</li>
+        <li>&ldquo;Rumors,&rdquo; CCA, 2009</li>
+      </ul>
+
+      <h3 class="press__subhead">Teaching, workshops, and guest critiques</h3>
+      <p class="press__paragraph">Adjunct Faculty, San Jose State University, BFA Graphic Design Program (2014). Guest critic at Art Center, CCA, Fordham, MCAD, MICA, NYU ITP, Otis College of the Arts (2009), Parsons School of Design, Pratt, and School of Visual Arts.</p>
     </section>
 
   </main>
