@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Keep this page out of search engines while it's a private preview -->
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Projects — Holly Gressley</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+
+    :root {
+      --ink:        #1a1a1a;
+      --ink-soft:   #0a0a0a;
+      --body:       #4a4a4a;
+      --muted:      #6b6b6b;
+      --rule:       #b0b0b0;
+      --border:     #e5e5e5;
+      --nav-border: #eaeaea;
+      --bg-tint:    #f3f4f6;
+      --white:      #ffffff;
+      --accent:     #b0512f;
+
+      --max-content: 1120px;
+      --sans: 'Bricolage Grotesque', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --serif: 'Crimson Text', Georgia, 'Times New Roman', serif;
+    }
+
+    html { -webkit-text-size-adjust: 100%; }
+
+    body {
+      margin: 0;
+      background: var(--white);
+      color: var(--body);
+      font-family: var(--serif);
+      font-size: 20px;
+      line-height: 32px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    a { color: inherit; }
+    button { font-family: inherit; }
+
+    /* ---------- Site nav (matches home) ---------- */
+    .site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(255, 255, 255, 0.95);
+      border-bottom: 1px solid var(--nav-border);
+      backdrop-filter: saturate(180%) blur(8px);
+      -webkit-backdrop-filter: saturate(180%) blur(8px);
+    }
+    .site-nav__inner {
+      max-width: var(--max-content);
+      margin: 0 auto;
+      padding: 12px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .brand {
+      color: var(--ink);
+      font-size: 20px;
+      line-height: 28px;
+      letter-spacing: -0.36px;
+      text-decoration: none;
+    }
+    .site-nav__links {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+    }
+    .site-nav__links a {
+      color: var(--ink);
+      font-size: 15px;
+      line-height: 22.5px;
+      text-decoration: none;
+    }
+    .site-nav__links a:hover { text-decoration: underline; }
+    .private-tag {
+      font-family: var(--sans);
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 3px 10px;
+      white-space: nowrap;
+    }
+
+    /* ---------- Shared type helpers ---------- */
+    .sans { font-family: var(--sans); }
+    .eyebrow {
+      font-family: var(--sans);
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .tag {
+      display: inline-block;
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: 2px 8px;
+    }
+
+    /* ---------- App container ---------- */
+    #app { min-height: 60vh; }
+    .wrap { max-width: var(--max-content); margin: 0 auto; }
+    .pad { padding-left: 32px; padding-right: 32px; }
+
+    /* ---------- Gallery header ---------- */
+    .gallery-header {
+      border-bottom: 1px solid var(--border);
+      padding-top: 28px;
+      padding-bottom: 28px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .gallery-header h1 {
+      font-family: var(--serif);
+      font-weight: 400;
+      color: var(--ink);
+      font-size: 40px;
+      line-height: 1.02;
+      letter-spacing: -0.5px;
+      margin: 6px 0 0;
+    }
+    .gallery-header__meta { text-align: right; }
+    .gallery-header__meta .count { font-family: var(--sans); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
+    .gallery-header__meta .yr { font-size: 14px; color: var(--muted); margin-top: 2px; }
+
+    .accent-strip { height: 2px; background: var(--accent); width: 48px; margin-top: 0; }
+
+    /* ---------- Hero card ---------- */
+    .hero { padding-top: 48px; }
+    .hero-card { cursor: pointer; display: block; margin-bottom: 8px; }
+    .hero-thumb {
+      position: relative;
+      overflow: hidden;
+      background: var(--bg-tint);
+      aspect-ratio: 21 / 9;
+      border: 1px solid var(--border);
+      margin-bottom: 20px;
+    }
+    .hero-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; display: block; }
+    .hero-card:hover .hero-thumb img { transform: scale(1.02); }
+    .thumb-overlay {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(17,17,17,0.4);
+      opacity: 0; transition: opacity 0.3s ease;
+    }
+    .hero-card:hover .thumb-overlay { opacity: 1; }
+    .play-ring { border: 2px solid #fff; display: flex; align-items: center; justify-content: center; }
+    .play-ring--lg { width: 64px; height: 64px; }
+    .play-ring--sm { width: 56px; height: 56px; }
+    .featured-badge {
+      position: absolute; top: 16px; left: 16px;
+      font-family: var(--sans); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+      color: #fff; padding: 4px 8px; background: rgba(17,17,17,0.55);
+    }
+    .hero-card .client { font-family: var(--sans); font-size: 14px; color: var(--muted); margin: 0 0 4px; }
+    .hero-card h2 {
+      font-family: var(--serif); font-weight: 400; color: var(--ink);
+      font-size: 34px; line-height: 1.08; margin: 0 0 8px;
+      transition: color 0.2s ease;
+    }
+    .hero-card:hover h2 { color: var(--accent); }
+    .hero-card .desc { font-size: 17px; line-height: 1.55; color: var(--muted); max-width: 640px; margin: 0; }
+
+    /* ---------- Grid ---------- */
+    .grid {
+      padding-top: 12px; padding-bottom: 8px;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 56px 40px;
+      max-width: 960px;
+    }
+    .card { }
+    .card.has-video { cursor: pointer; }
+    .card.no-video { cursor: default; opacity: 0.6; }
+    .card-thumb {
+      position: relative; overflow: hidden; background: var(--bg-tint);
+      aspect-ratio: 16 / 9; border: 1px solid var(--border); margin-bottom: 16px;
+    }
+    .card-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; display: block; }
+    .card.has-video:hover .card-thumb img { transform: scale(1.03); }
+    .card.has-video:hover .thumb-overlay { opacity: 1; }
+    .thumb-index {
+      position: absolute; top: 12px; left: 12px;
+      font-family: var(--sans); font-size: 12px; font-weight: 500; letter-spacing: 0.16em;
+      color: #fff;
+    }
+    .card.no-video .thumb-index { color: var(--muted); }
+    .thumb-soon {
+      width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
+      font-family: var(--sans); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted);
+    }
+    .lock-badge {
+      position: absolute; top: 12px; right: 12px;
+      display: flex; align-items: center; gap: 4px;
+      background: rgba(255,255,255,0.9); padding: 4px 8px;
+    }
+    .lock-badge span { font-family: var(--sans); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink); }
+
+    .card-body { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
+    .card-body .client { font-family: var(--sans); font-size: 14px; color: var(--muted); margin: 0 0 2px; }
+    .card-body h2 { font-family: var(--serif); font-weight: 400; color: var(--ink); font-size: 22px; line-height: 1.15; margin: 0 0 10px; }
+    .card-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+    .card-body .desc { font-size: 15px; line-height: 1.55; color: var(--muted); margin: 0; }
+    .card-arrow { margin-top: 4px; flex-shrink: 0; color: var(--muted); transition: transform 0.2s ease; }
+    .card.has-video:hover .card-arrow { transform: translateX(3px); }
+
+    /* ---------- Gallery footer ---------- */
+    .gallery-footer {
+      border-top: 1px solid var(--border);
+      margin-top: 48px;
+      padding-top: 24px; padding-bottom: 24px;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      font-family: var(--sans); font-size: 12px; color: var(--muted); letter-spacing: 0.04em;
+    }
+
+    /* ---------- Case study ---------- */
+    .cs-nav {
+      border-bottom: 1px solid var(--border);
+      padding-top: 18px; padding-bottom: 18px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .cs-back {
+      background: none; border: 0; cursor: pointer; padding: 0;
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 15px; color: var(--muted); transition: color 0.15s ease;
+    }
+    .cs-back:hover { color: var(--ink); }
+    .cs-count { font-family: var(--sans); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
+
+    .cs-main { padding-top: 40px; padding-bottom: 40px; max-width: 960px; }
+    .cs-head { margin-bottom: 32px; display: flex; align-items: flex-end; justify-content: space-between; gap: 32px; }
+    .cs-head .client { font-family: var(--sans); font-size: 15px; color: var(--muted); margin: 0 0 4px; }
+    .cs-head h1 { font-family: var(--serif); font-weight: 400; color: var(--ink); font-size: 48px; line-height: 1.08; margin: 0 0 12px; }
+    .cs-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 24px; }
+    .cs-meta { display: flex; flex-wrap: wrap; gap: 12px 40px; border-top: 1px solid var(--border); padding-top: 16px; max-width: 640px; }
+    .cs-meta .label { font-family: var(--sans); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin: 0 0 2px; }
+    .cs-meta .val { font-size: 15px; color: var(--body); margin: 0; }
+    .cs-loomlink {
+      display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; flex-shrink: 0;
+      font-family: var(--sans); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--muted); text-decoration: none; transition: color 0.15s ease;
+    }
+    .cs-loomlink:hover { color: var(--accent); }
+
+    .cs-embed-row { display: grid; grid-template-columns: 2fr 1fr; gap: 32px; margin: 32px 0 40px; }
+    .cs-embed { width: 100%; aspect-ratio: 16 / 9; background: var(--bg-tint); border: 1px solid var(--border); overflow: hidden; }
+    .cs-embed iframe { width: 100%; height: 100%; border: 0; display: block; }
+    .cs-notes { border-left: 1px solid var(--border); padding-left: 24px; }
+    .cs-notes .label { font-family: var(--sans); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin: 0 0 16px; }
+    .cs-note { position: relative; padding-left: 16px; margin-bottom: 16px; }
+    .cs-note .dot { position: absolute; left: 0; top: 9px; width: 6px; height: 6px; background: var(--accent); }
+    .cs-note .ts { font-family: var(--sans); font-size: 12px; color: var(--accent); margin-right: 8px; }
+    .cs-note .txt { font-size: 15px; line-height: 1.4; color: var(--body); }
+    .cs-note-empty { font-size: 15px; color: var(--muted); font-style: italic; }
+
+    .cs-body { display: grid; grid-template-columns: 2fr 1fr; gap: 40px; margin-bottom: 64px; }
+    .cs-body h2 { font-family: var(--serif); font-weight: 400; color: var(--ink); font-size: 22px; margin: 0 0 12px; }
+    .cs-body .overview { font-size: 17px; line-height: 1.6; color: var(--ink); margin: 0 0 24px; }
+    .cs-section { margin-bottom: 24px; }
+    .cs-section h3 { font-family: var(--serif); font-weight: 600; font-size: 17px; color: var(--ink); margin: 0 0 4px; }
+    .cs-section .divline { height: 1px; background: var(--border); margin-bottom: 12px; }
+    .cs-section p { font-size: 15px; line-height: 1.55; color: var(--muted); margin: 0; }
+    .cs-aside { border-left: 1px solid var(--border); padding-left: 32px; }
+    .cs-aside .label { font-family: var(--sans); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin: 0 0 4px; }
+    .cs-aside .val { font-size: 15px; color: var(--body); margin: 0; }
+
+    .cs-next { border-top: 1px solid var(--border); padding-top: 32px; }
+    .cs-next .label { font-family: var(--sans); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin: 0 0 16px; }
+    .cs-next button {
+      background: none; border: 0; cursor: pointer; padding: 0; width: 100%; text-align: left;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    }
+    .cs-next .next-title { font-family: var(--serif); font-size: 30px; line-height: 1.1; color: var(--ink); margin: 0; transition: color 0.2s ease; }
+    .cs-next button:hover .next-title { color: var(--accent); }
+    .cs-next .next-sub { font-size: 15px; color: var(--muted); margin: 2px 0 0; }
+    .cs-next .next-arrow { flex-shrink: 0; color: var(--muted); transition: color 0.2s ease, transform 0.2s ease; }
+    .cs-next button:hover .next-arrow { color: var(--accent); transform: translateX(4px); }
+
+    /* ---------- Footer (site) ---------- */
+    footer.site-footer {
+      max-width: var(--max-content);
+      margin: 0 auto;
+      padding: 0 32px 64px;
+    }
+    .footer-inner {
+      border-top: 1px solid var(--rule);
+      padding-top: 32px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .footer-inner p { margin: 0; font-size: 15px; line-height: 26px; }
+
+    /* ---------- Passphrase gate ---------- */
+    #gate {
+      position: fixed; inset: 0; z-index: 100;
+      background: var(--white);
+      display: flex; align-items: center; justify-content: center;
+      padding: 24px;
+    }
+    .gate-card { width: 100%; max-width: 360px; text-align: left; }
+    .gate-card .eyebrow { display: block; margin-bottom: 12px; }
+    .gate-card h1 { font-family: var(--serif); font-weight: 400; color: var(--ink); font-size: 32px; line-height: 1.1; margin: 0 0 8px; }
+    .gate-card p { font-size: 16px; line-height: 1.5; color: var(--muted); margin: 0 0 24px; }
+    .gate-form { display: flex; gap: 8px; }
+    .gate-input {
+      flex: 1; font-family: var(--sans); font-size: 15px;
+      padding: 12px 14px; border: 1px solid var(--rule); border-radius: 6px;
+      color: var(--ink); background: var(--white); outline: none;
+    }
+    .gate-input:focus { border-color: var(--ink); }
+    .gate-btn {
+      font-family: var(--sans); font-size: 15px; cursor: pointer;
+      padding: 12px 20px; border-radius: 6px; border: 1px solid var(--ink);
+      background: var(--ink); color: var(--white); transition: opacity 0.15s ease;
+    }
+    .gate-btn:hover { opacity: 0.85; }
+    .gate-error { font-family: var(--sans); font-size: 13px; color: var(--accent); margin: 12px 0 0; min-height: 18px; }
+    body.locked { overflow: hidden; }
+    #site { display: none; }
+    body.unlocked #site { display: block; }
+    body.unlocked #gate { display: none; }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 860px) {
+      .cs-embed-row { grid-template-columns: 1fr; }
+      .cs-notes { border-left: 0; padding-left: 0; border-top: 1px solid var(--border); padding-top: 20px; }
+      .cs-body { grid-template-columns: 1fr; gap: 28px; }
+      .cs-aside { border-left: 0; padding-left: 0; border-top: 1px solid var(--border); padding-top: 20px; }
+    }
+    @media (max-width: 760px) {
+      .pad { padding-left: 24px; padding-right: 24px; }
+      .site-nav__inner { padding: 12px 24px; }
+      .grid { grid-template-columns: 1fr; gap: 40px; max-width: 480px; }
+      .gallery-header h1 { font-size: 32px; }
+      .gallery-header__meta { display: none; }
+      .hero-card h2 { font-size: 28px; }
+      .cs-head { flex-direction: column; align-items: flex-start; gap: 16px; }
+      .cs-head h1 { font-size: 34px; }
+      footer.site-footer { padding: 0 24px 48px; }
+    }
+  </style>
+</head>
+<body class="locked">
+
+  <!-- ============ Passphrase gate ============ -->
+  <div id="gate">
+    <div class="gate-card">
+      <span class="eyebrow">Private preview</span>
+      <h1>Projects</h1>
+      <p>This page isn't public yet. Enter the passphrase to continue.</p>
+      <form class="gate-form" id="gate-form" autocomplete="off">
+        <input class="gate-input" id="gate-input" type="password" placeholder="Passphrase" aria-label="Passphrase" autofocus />
+        <button class="gate-btn" type="submit">Enter</button>
+      </form>
+      <p class="gate-error" id="gate-error" role="alert"></p>
+    </div>
+  </div>
+
+  <!-- ============ Site ============ -->
+  <div id="site">
+    <nav class="site-nav">
+      <div class="site-nav__inner">
+        <a href="/" class="brand">Holly Gressley</a>
+        <div class="site-nav__links">
+          <span class="private-tag">Private preview</span>
+          <a href="/">Home</a>
+        </div>
+      </div>
+    </nav>
+
+    <div id="app"></div>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <p>&copy; 2026 Holly Gressley. All rights reserved.</p>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+  /* =========================================================
+     PASSPHRASE  —  to change it, generate a new SHA-256 hash:
+       macOS Terminal:  printf '%s' "your-new-passphrase" | shasum -a 256
+     then paste the hash below. Current passphrase: preview2026
+     ========================================================= */
+  const PASSPHRASE_HASH = "36e11b86750178bc2d659d7779dbfdf28cee8c60a6a804e47d3ef1ae85f4a70c";
+
+  async function sha256(str) {
+    const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(str));
+    return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, "0")).join("");
+  }
+
+  function unlock() {
+    document.body.classList.remove("locked");
+    document.body.classList.add("unlocked");
+    renderGallery();
+  }
+
+  /* =========================================================
+     PROJECT DATA  —  edit titles, copy, roles, and notes here.
+     `id` is the Loom session id (the string after /share/ in a
+     Loom URL). Leave `id` empty for a "coming soon" placeholder.
+     ========================================================= */
+  const projects = [
+    {
+      id: "0212e3aee606428380d3b7f00d23a089",
+      title: "Mexico Prototype",
+      client: "I Need an A",
+      subtitle: "End-to-end market flow",
+      description: "Onboarding and core provider interactions designed for the Mexico market. This prototype covers the full activation journey from first login to confirmed booking.",
+      tags: ["Prototype", "Mobile"],
+      year: "2024",
+      protected: false,
+      featured: true,
+      role: "Lead product designer, solo",
+      timeline: "Add timeline here",
+      stack: "Add tools/stack here",
+      org: "I Need an A",
+      notes: [
+        { ts: "0:04", text: "Add a note on what's happening at this moment" },
+        { ts: "0:20", text: "Add a note on a key decision or interaction" },
+        { ts: "0:45", text: "Add a note on an edge case or outcome" },
+      ],
+    },
+    {
+      id: "5d4fd28ea5a9424c875deb1959b27d50",
+      title: "Chat Demo 2",
+      client: "Robin AI",
+      subtitle: "Conversational interface",
+      description: "Second iteration of the chat experience — refined message threading, presence indicators, and inline action affordances for high-velocity task completion.",
+      tags: ["Chat", "Interaction Design"],
+      year: "2024",
+      protected: true,
+      featured: false,
+      role: "Add role here",
+      timeline: "Add timeline here",
+      stack: "Add tools/stack here",
+      org: "Robin AI",
+      notes: [
+        { ts: "0:00", text: "Add a note on what's happening at this moment" },
+        { ts: "0:00", text: "Add a note on a key decision or interaction" },
+      ],
+    },
+    {
+      id: "a95c9adfa88a415db97abf82ae4c1b60",
+      title: "Advanced Search",
+      client: "Netflix",
+      subtitle: "Narrated walkthrough",
+      description: "A narrated walkthrough of the advanced search system: faceted filtering, saved searches, and edge-case result states. Audio included.",
+      tags: ["Search", "IA"],
+      year: "2024",
+      protected: true,
+      featured: false,
+      role: "Add role here",
+      timeline: "Add timeline here",
+      stack: "Add tools/stack here",
+      org: "Netflix",
+      notes: [
+        { ts: "0:00", text: "Add a note on what's happening at this moment" },
+        { ts: "0:00", text: "Add a note on a key decision or interaction" },
+      ],
+    },
+    {
+      id: "8bc29c3695594ae49d3bf7d12bf922ac",
+      title: "Add a New Provider",
+      client: "I Need an A",
+      subtitle: "Forms & onboarding",
+      description: "Multi-step form for provider onboarding covering validation patterns, progressive disclosure, and inline error recovery.",
+      tags: ["Forms", "Onboarding"],
+      year: "2024",
+      protected: false,
+      featured: false,
+      role: "Add role here",
+      timeline: "Add timeline here",
+      stack: "Add tools/stack here",
+      org: "I Need an A",
+      notes: [
+        { ts: "0:00", text: "Add a note on what's happening at this moment" },
+        { ts: "0:00", text: "Add a note on a key decision or interaction" },
+      ],
+    },
+    {
+      id: "",
+      title: "Coming Soon",
+      client: "WMG",
+      subtitle: "Case study in progress",
+      description: "Placeholder — add a one-sentence description of the WMG project here.",
+      tags: [],
+      year: "2024",
+      protected: false,
+      featured: false,
+      role: "", timeline: "", stack: "", org: "WMG",
+      notes: [],
+    },
+    {
+      id: "",
+      title: "Coming Soon",
+      client: "Vox Media",
+      subtitle: "Case study in progress",
+      description: "Placeholder — add a one-sentence description of the Vox Media project here.",
+      tags: [],
+      year: "2024",
+      protected: false,
+      featured: false,
+      role: "", timeline: "", stack: "", org: "Vox Media",
+      notes: [],
+    },
+  ];
+
+  /* ---------- Icons (lucide) ---------- */
+  const icons = {
+    arrowLeft:  '<svg class="ico" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>',
+    arrowRight: (s) => '<svg class="ico" width="'+s+'" height="'+s+'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>',
+    externalLink: '<svg class="ico" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h6"/></svg>',
+    lock: '<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>',
+    play: '<svg width="18" height="20" viewBox="0 0 18 20" fill="#fff"><path d="M1 1l16 9-16 9V1z"/></svg>',
+  };
+
+  const esc = (s) => String(s == null ? "" : s).replace(/[&<>"]/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;" }[c]));
+  const thumb = (id) => "https://cdn.loom.com/sessions/thumbnails/" + id + "-00001.jpg";
+  const pad2 = (n) => String(n).padStart(2, "0");
+  const tag = (label) => '<span class="tag">' + esc(label) + '</span>';
+
+  const app = document.getElementById("app");
+
+  /* ---------- Gallery ---------- */
+  function renderGallery() {
+    window.scrollTo(0, 0);
+    const featured = projects.find(p => p.featured && p.id);
+    const rest = projects.filter(p => p !== featured);
+
+    let html = '<div class="wrap pad">';
+
+    // Header
+    html += '<header class="gallery-header">' +
+      '<div><p class="eyebrow">Portfolio</p><h1>Projects</h1></div>' +
+      '<div class="gallery-header__meta"><p class="count">' + projects.length + ' Projects</p><p class="yr">2024</p></div>' +
+      '</header>';
+    html += '<div class="accent-strip"></div>';
+
+    // Hero
+    if (featured) {
+      html += '<div class="hero"><article class="hero-card" data-id="' + esc(featured.id) + '">' +
+        '<div class="hero-thumb">' +
+          '<img src="' + thumb(featured.id) + '" alt="' + esc(featured.title) + ' prototype thumbnail" />' +
+          '<div class="thumb-overlay"><div class="play-ring play-ring--lg">' + icons.play + '</div></div>' +
+          '<div class="featured-badge">Featured</div>' +
+        '</div>' +
+        '<p class="client">' + esc(featured.client) + '</p>' +
+        '<h2>' + esc(featured.title) + '</h2>' +
+        '<p class="desc">' + esc(featured.description) + '</p>' +
+      '</article></div>';
+    }
+
+    // Grid
+    html += '<div class="grid">';
+    rest.forEach((p, i) => {
+      const hasVideo = Boolean(p.id);
+      html += '<article class="card ' + (hasVideo ? "has-video" : "no-video") + '"' + (hasVideo ? ' data-id="' + esc(p.id) + '"' : "") + '>' +
+        '<div class="card-thumb">';
+      if (hasVideo) {
+        html += '<img src="' + thumb(p.id) + '" alt="' + esc(p.title) + ' prototype thumbnail" />' +
+          '<div class="thumb-overlay"><div class="play-ring play-ring--sm">' + icons.play + '</div></div>';
+      } else {
+        html += '<div class="thumb-soon">Video coming soon</div>';
+      }
+      html += '<div class="thumb-index">' + pad2(i + 1) + '</div>';
+      if (p.protected) {
+        html += '<div class="lock-badge">' + icons.lock + '<span>Protected</span></div>';
+      }
+      html += '</div>'; // thumb
+
+      html += '<div class="card-body"><div style="flex:1;min-width:0">' +
+          '<p class="client">' + esc(p.client) + '</p>' +
+          '<h2>' + esc(p.title) + '</h2>' +
+          '<div class="card-tags">' + tag(p.year) + p.tags.map(tag).join("") + '</div>' +
+          (p.description ? '<p class="desc">' + esc(p.description) + '</p>' : "") +
+        '</div>' +
+        (hasVideo ? '<span class="card-arrow">' + icons.arrowRight(18) + '</span>' : "") +
+      '</div>';
+      html += '</article>';
+    });
+    html += '</div>'; // grid
+
+    html += '<footer class="gallery-footer"><span>UX &amp; Product Design</span><span>Select a project to view the case study</span></footer>';
+    html += '</div>'; // wrap
+
+    app.innerHTML = html;
+
+    app.querySelectorAll("[data-id]").forEach(el => {
+      el.addEventListener("click", () => renderCaseStudy(el.getAttribute("data-id")));
+    });
+  }
+
+  /* ---------- Case study ---------- */
+  function renderCaseStudy(id) {
+    window.scrollTo(0, 0);
+    const idx = projects.findIndex(p => p.id === id);
+    const p = projects[idx];
+    if (!p) { renderGallery(); return; }
+    const next = projects[(idx + 1) % projects.length];
+    const embedUrl = "https://www.loom.com/embed/" + p.id + "?hide_owner=true&hide_share=true&hideEmbedTopBar=true";
+
+    let html = '<div class="wrap pad">';
+
+    // Nav
+    html += '<nav class="cs-nav">' +
+      '<button class="cs-back" id="cs-back">' + icons.arrowLeft + '<span>All Projects</span></button>' +
+      '<span class="cs-count">' + pad2(idx + 1) + ' / ' + pad2(projects.length) + '</span>' +
+      '</nav>';
+
+    html += '<main class="cs-main">';
+
+    // Head
+    html += '<div class="cs-head"><div>' +
+        '<p class="client">' + esc(p.client) + '</p>' +
+        '<h1>' + esc(p.title) + '</h1>' +
+        '<div class="cs-tags">' + tag(p.year) + p.tags.map(tag).join("") + '</div>' +
+        '<div class="cs-meta">' +
+          '<div><p class="label">Role</p><p class="val">' + esc(p.role) + '</p></div>' +
+          '<div><p class="label">Timeline</p><p class="val">' + esc(p.timeline) + '</p></div>' +
+          '<div><p class="label">Stack</p><p class="val">' + esc(p.stack) + '</p></div>' +
+          '<div><p class="label">Org</p><p class="val">' + esc(p.org) + '</p></div>' +
+        '</div>' +
+      '</div>' +
+      '<a class="cs-loomlink" href="https://www.loom.com/share/' + esc(p.id) + '" target="_blank" rel="noopener noreferrer">Open in Loom ' + icons.externalLink + '</a>' +
+    '</div>';
+
+    html += '<div class="accent-strip" style="margin-bottom:32px"></div>';
+
+    // Embed + notes
+    html += '<div class="cs-embed-row">' +
+      '<div class="cs-embed"><iframe src="' + embedUrl + '" title="' + esc(p.title) + '" allowfullscreen allow="autoplay; fullscreen"></iframe></div>' +
+      '<div class="cs-notes"><p class="label">Walkthrough Notes</p>';
+    if (p.notes.length) {
+      p.notes.forEach(n => {
+        html += '<div class="cs-note"><span class="dot"></span><span class="ts">' + esc(n.ts) + '</span><span class="txt">' + esc(n.text) + '</span></div>';
+      });
+    } else {
+      html += '<p class="cs-note-empty">No notes added yet.</p>';
+    }
+    html += '</div></div>';
+
+    // Body
+    html += '<div class="cs-body"><div>' +
+        '<h2>Overview</h2>' +
+        '<p class="overview">' + esc(p.description) + '</p>';
+    ["Problem", "Process", "Outcome"].forEach(section => {
+      html += '<div class="cs-section"><h3>' + section + '</h3><div class="divline"></div>' +
+        '<p>Add your ' + section.toLowerCase() + ' notes here. What was the challenge? What decisions shaped the design? What did you learn?</p></div>';
+    });
+    html += '</div>' +
+      '<aside class="cs-aside"><p class="label">Format</p><p class="val">Loom Prototype Recording</p></aside>' +
+    '</div>';
+
+    // Next
+    html += '<div class="cs-next"><p class="label">Next Project</p>' +
+      '<button data-next="' + esc(next.id) + '">' +
+        '<div><p class="next-title">' + esc(next.title) + '</p><p class="next-sub">' + esc(next.subtitle) + '</p></div>' +
+        '<span class="next-arrow">' + icons.arrowRight(22) + '</span>' +
+      '</button></div>';
+
+    html += '</main></div>';
+
+    app.innerHTML = html;
+
+    document.getElementById("cs-back").addEventListener("click", renderGallery);
+    const nextBtn = app.querySelector("[data-next]");
+    nextBtn.addEventListener("click", () => {
+      const nid = nextBtn.getAttribute("data-next");
+      if (nid) renderCaseStudy(nid); else renderGallery();
+    });
+  }
+
+  /* ---------- Gate init (runs last, after everything above is defined) ---------- */
+  (function initGate() {
+    if (sessionStorage.getItem("projects_unlocked") === "1") { unlock(); return; }
+    const form = document.getElementById("gate-form");
+    const input = document.getElementById("gate-input");
+    const err = document.getElementById("gate-error");
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const hash = await sha256(input.value.trim());
+      if (hash === PASSPHRASE_HASH) {
+        sessionStorage.setItem("projects_unlocked", "1");
+        unlock();
+      } else {
+        err.textContent = "That passphrase didn't match. Try again.";
+        input.value = "";
+        input.focus();
+      }
+    });
+  })();
+  </script>
+</body>
+</html>
