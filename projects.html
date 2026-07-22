@@ -423,6 +423,7 @@
   const projects = [
     {
       id: "0212e3aee606428380d3b7f00d23a089",
+      thumb: "https://cdn.loom.com/sessions/thumbnails/0212e3aee606428380d3b7f00d23a089-6bca23306e071fd7.gif",
       title: "Mexico Prototype",
       client: "I Need an A",
       subtitle: "End-to-end market flow",
@@ -435,18 +436,16 @@
       timeline: "Add timeline here",
       stack: "Add tools/stack here",
       org: "I Need an A",
-      notes: [
-        { ts: "0:04", text: "Add a note on what's happening at this moment" },
-        { ts: "0:20", text: "Add a note on a key decision or interaction" },
-        { ts: "0:45", text: "Add a note on an edge case or outcome" },
-      ],
+      // No audio on this recording — no walkthrough transcript.
+      notes: [],
     },
     {
       id: "5d4fd28ea5a9424c875deb1959b27d50",
-      title: "Chat Demo 2",
-      client: "Robin AI",
+      thumb: "https://cdn.loom.com/sessions/thumbnails/5d4fd28ea5a9424c875deb1959b27d50-164b1262b10bff18.gif",
+      title: "Chat Prototype",
+      client: "I Need an A",
       subtitle: "Conversational interface",
-      description: "Second iteration of the chat experience — refined message threading, presence indicators, and inline action affordances for high-velocity task completion.",
+      description: "A walkthrough of the anonymous counselor-chat prototype — entry points from search, preset prompts, inline resources, privacy-first auto-deleting conversations, and an optional voice call.",
       tags: ["Chat", "Interaction Design"],
       year: "2024",
       protected: true,
@@ -454,18 +453,26 @@
       role: "Add role here",
       timeline: "Add timeline here",
       stack: "Add tools/stack here",
-      org: "Robin AI",
+      org: "I Need an A",
+      // Highlights pulled from the video transcript.
       notes: [
-        { ts: "0:00", text: "Add a note on what's happening at this moment" },
-        { ts: "0:00", text: "Add a note on a key decision or interaction" },
+        { ts: "0:18", text: "Entry point: from I Need an A search, a seeker reaches chat through the FAQ's “Who can I talk to?”" },
+        { ts: "0:52", text: "Availability indicator shows when counselors are online versus offline outside staffed hours." },
+        { ts: "1:13", text: "Chat landing pairs a counselor with preset prompts to lower the barrier to starting." },
+        { ts: "2:22", text: "Counselors can share resources — articles and a medication-abortion video — inline in the thread." },
+        { ts: "3:29", text: "Privacy by design: chats auto-delete after 24h, on tab close, on back, or via “Delete chat.”" },
+        { ts: "4:12", text: "Preset topics are configurable — control whether a pick connects to a counselor or shares resources first." },
+        { ts: "6:03", text: "Several landing variants (choose-topic-first vs. counselor-first) help triage to the right volunteer." },
+        { ts: "7:45", text: "Optional voice call from within chat, with a disclaimer that it keeps no record and isn't tied to a number." },
       ],
     },
     {
       id: "a95c9adfa88a415db97abf82ae4c1b60",
+      thumb: "https://cdn.loom.com/sessions/thumbnails/a95c9adfa88a415db97abf82ae4c1b60-eee0a6a4083ce9a9.gif",
       title: "Advanced Search",
-      client: "Netflix",
+      client: "I Need an A",
       subtitle: "Narrated walkthrough",
-      description: "A narrated walkthrough of the advanced search system: faceted filtering, saved searches, and edge-case result states. Audio included.",
+      description: "A narrated walkthrough of the Advanced Search grid for the I Need an A provider database — sort and filter by location, services, pricing, and gestational limits, with switchable table and map views and shareable URLs.",
       tags: ["Search", "IA"],
       year: "2024",
       protected: true,
@@ -473,14 +480,22 @@
       role: "Add role here",
       timeline: "Add timeline here",
       stack: "Add tools/stack here",
-      org: "Netflix",
+      org: "I Need an A",
+      // Highlights pulled from the video transcript.
       notes: [
-        { ts: "0:00", text: "Add a note on what's happening at this moment" },
-        { ts: "0:00", text: "Add a note on a key decision or interaction" },
+        { ts: "0:07", text: "Enter Advanced Search from the I Need an A search page into the new grid view." },
+        { ts: "0:30", text: "A grid of every provider in the database, sortable by name, location, services, and pricing." },
+        { ts: "1:00", text: "Status indicators: a shield, a lock for logged-in-only providers, plus pre/post-care and telehealth coverage." },
+        { ts: "1:43", text: "Location search (Baltimore) adds a distance column and sorts results by proximity." },
+        { ts: "2:24", text: "Toggle between table and map views to see providers geographically." },
+        { ts: "3:06", text: "Layered filters (near Topeka, 24+ weeks, in-clinic, NAF funding) narrow 24 providers down to 4." },
+        { ts: "4:01", text: "An exceptions-based-care toggle surfaces additional, logged-in-only providers." },
+        { ts: "4:43", text: "Share any table or map view by copying its URL, or embed it with a snippet." },
       ],
     },
     {
       id: "8bc29c3695594ae49d3bf7d12bf922ac",
+      thumb: "https://cdn.loom.com/sessions/thumbnails/8bc29c3695594ae49d3bf7d12bf922ac-cd9ddfea9add0d2c.gif",
       title: "Add a New Provider",
       client: "I Need an A",
       subtitle: "Forms & onboarding",
@@ -493,10 +508,21 @@
       timeline: "Add timeline here",
       stack: "Add tools/stack here",
       org: "I Need an A",
-      notes: [
-        { ts: "0:00", text: "Add a note on what's happening at this moment" },
-        { ts: "0:00", text: "Add a note on a key decision or interaction" },
-      ],
+      // No audio on this recording — no walkthrough transcript.
+      notes: [],
+    },
+    {
+      id: "",
+      title: "Coming Soon",
+      client: "Netflix",
+      subtitle: "Case study in progress",
+      description: "Placeholder — add a one-sentence description of the Netflix project here.",
+      tags: [],
+      year: "2024",
+      protected: false,
+      featured: false,
+      role: "", timeline: "", stack: "", org: "Netflix",
+      notes: [],
     },
     {
       id: "",
@@ -536,7 +562,7 @@
   };
 
   const esc = (s) => String(s == null ? "" : s).replace(/[&<>"]/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;" }[c]));
-  const thumb = (id) => "https://cdn.loom.com/sessions/thumbnails/" + id + "-00001.jpg";
+  const thumbOf = (p) => p.thumb || ("https://cdn.loom.com/sessions/thumbnails/" + p.id + "-00001.jpg");
   const pad2 = (n) => String(n).padStart(2, "0");
   const tag = (label) => '<span class="tag">' + esc(label) + '</span>';
 
@@ -561,7 +587,7 @@
     if (featured) {
       html += '<div class="hero"><article class="hero-card" data-id="' + esc(featured.id) + '">' +
         '<div class="hero-thumb">' +
-          '<img src="' + thumb(featured.id) + '" alt="' + esc(featured.title) + ' prototype thumbnail" />' +
+          '<img src="' + thumbOf(featured) + '" alt="' + esc(featured.title) + ' prototype thumbnail" />' +
           '<div class="thumb-overlay"><div class="play-ring play-ring--lg">' + icons.play + '</div></div>' +
           '<div class="featured-badge">Featured</div>' +
         '</div>' +
@@ -578,7 +604,7 @@
       html += '<article class="card ' + (hasVideo ? "has-video" : "no-video") + '"' + (hasVideo ? ' data-id="' + esc(p.id) + '"' : "") + '>' +
         '<div class="card-thumb">';
       if (hasVideo) {
-        html += '<img src="' + thumb(p.id) + '" alt="' + esc(p.title) + ' prototype thumbnail" />' +
+        html += '<img src="' + thumbOf(p) + '" alt="' + esc(p.title) + ' prototype thumbnail" />' +
           '<div class="thumb-overlay"><div class="play-ring play-ring--sm">' + icons.play + '</div></div>';
       } else {
         html += '<div class="thumb-soon">Video coming soon</div>';
